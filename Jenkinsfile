@@ -33,7 +33,7 @@ pipeline {
                 sh './gradlew jacocoTestCoverageVerification'
             }
         }
-        stage('Build Backend Docker Image'') {
+        stage('Build Backend Docker Image') {
             steps {
                 sh './gradlew build'
             }
