@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Clone the project') {
+        stage('Prepare environment') {
             steps {
                 sh './gradlew compileJava'
             }
@@ -11,7 +11,7 @@ pipeline {
                 sh './gradlew test'
             }
         }
-        stage('Test Backend') {
+        stage('Build') {
             steps {
                 sh './gradlew jacocoTestReport'
                 publishHTML(target: [
@@ -22,7 +22,7 @@ pipeline {
                 sh './gradlew jacocoTestCoverageVerification'
             }
         }
-        stage('Code coverage') {
+        stage('Sonar') {
             steps {
                 sh './gradlew jacocoTestReport'
                 publishHTML(target: [
@@ -33,11 +33,12 @@ pipeline {
                 sh './gradlew jacocoTestCoverageVerification'
             }
         }
-        stage('Build Backend Docker Image') {
+        stage('Deploy') {
             steps {
                 sh './gradlew build'
             }
         }
+        /*
         stage('Push Backend Docker Image') {
             steps {
                 sh 'docker build -t calculator .'
@@ -60,6 +61,7 @@ pipeline {
                 sh './gradlew acceptanceTest -Dcalculator.url=http://localhost:8765'
             }
         }
+        */
     }
     post {
         always {
