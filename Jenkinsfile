@@ -8,11 +8,13 @@ pipeline {
         }
         stage('Build Backend') {
             steps {
+            	sleep 160
                 sh './gradlew test'
             }
         }
         stage('Build') {
             steps {
+            	sleep 180
                 sh './gradlew jacocoTestReport'
                 publishHTML(target: [
                     reportDir: 'build/reports/jacoco/test/html',
@@ -24,6 +26,7 @@ pipeline {
         }
         stage('Sonar') {
             steps {
+            	sleep 100
                 sh './gradlew jacocoTestReport'
                 publishHTML(target: [
                     reportDir: 'build/reports/jacoco/test/html',
