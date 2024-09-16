@@ -6,6 +6,7 @@ pipeline {
                 sh './gradlew compileJava'
             }
         }
+        /*
         stage('Build Backend') {
             steps {
             	sleep 160
@@ -36,22 +37,26 @@ pipeline {
                 sh './gradlew jacocoTestCoverageVerification'
             }
         }
-        stage('Deploy') {
+        */
+        stage('Build') {
             steps {
+            	sleep 160
                 sh './gradlew build'
             }
         }
-        /*
-        stage('Push Backend Docker Image') {
+        stage('Sonar') {
             steps {
+                sleep 180
                 sh 'docker build -t calculator .'
             }
         }
-        stage('Build Frontend') {
+        stage('Deploy') {
             steps {
+            	sleep 100
                 sh 'docker push localhost:5000/calculator'
             }
         }
+        */
         stage('Deploy Frontend') {
             steps {
                 sh 'docker rm calculator'
