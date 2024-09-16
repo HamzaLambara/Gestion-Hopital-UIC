@@ -56,7 +56,7 @@ pipeline {
                 sh 'docker push localhost:5000/calculator'
             }
         }
-        */
+        /*
         stage('Deploy Frontend') {
             steps {
                 sh 'docker rm calculator'
